@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Švieslentė</title>
+    <link rel="stylesheet" href="scoreboard.css" />
+  </head>
+  <body>
+    <div class="scoreboard">
+      <div class="team" id="teamA">
+        <h2>Komanda A</h2>
+        <div class="score" id="scoreA">0</div>
+        <div class="buttons">
+          <button class="red-button" onclick="addPoints('A', 1)">
+            Pridėti 1
+          </button>
+          <button class="red-button" onclick="addPoints('A', 2)">
+            Pridėti 2
+          </button>
+          <button class="red-button" onclick="addPoints('A', 3)">
+            Pridėti 3
+          </button>
+        </div>
+      </div>
+      <div class="timer">
+        <div id="quarter">1 kėlinys</div>
+        <div id="time">10:00</div>
+        <div class="timer-buttons">
+          <button class="timer-button" onclick="setSpeed(1)">1x</button>
+          <button class="timer-button" onclick="setSpeed(2)">2x</button>
+          <button class="timer-button" onclick="setSpeed(5)">5x</button>
+          <button class="timer-button" onclick="setSpeed(10)">10x</button>
+          <button class="timer-button" onclick="setSpeed(100)">100x</button>
+        </div>
+      </div>
+      <div class="team" id="teamB">
+        <h2>Komanda B</h2>
+        <div class="score" id="scoreB">0</div>
+        <div class="buttons">
+          <button class="blue-button" onclick="addPoints('B', 1)">
+            Pridėti 1
+          </button>
+          <button class="blue-button" onclick="addPoints('B', 2)">
+            Pridėti 2
+          </button>
+          <button class="blue-button" onclick="addPoints('B', 3)">
+            Pridėti 3
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="stats">
+      <h2>Statistikos</h2>
+      <div class="table-container">
+        <table id="statsTable">
+          <thead>
+            <tr>
+              <th class="narrow">Kėlinys</th>
+              <th>Komanda</th>
+              <th>Taškai</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+    <div id="winnerModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <p id="winnerMessage"></p>
+      </div>
+    </div>
+    <audio
+      id="winSound"
+      src="https://archive.org/download/wearethechampionsremastered2011/We%20Are%20The%20Champions%20%28Remastered%202011%29.mp3"
+    ></audio>
+    <script src="scoreboard.js"></script>
+  </body>
+</html>
