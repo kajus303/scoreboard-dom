@@ -63,13 +63,48 @@ function updateTimer() {
 }
 
 function showWinner() {
-  const winner = scoreA > scoreB ? "Komanda A" : "Komanda B";
-  document.getElementById("winnerMessage").textContent = `${winner} laimėjo!`;
+  let winnerMessage = "";
+  if (scoreA > scoreB) {
+    winnerMessage = "Komanda A laimėjo!";
+  } else if (scoreA < scoreB) {
+    winnerMessage = "Komanda B laimėjo!";
+  } else {
+    winnerMessage = "Lygiosios!";
+  }
+  document.getElementById("winnerMessage").textContent = winnerMessage;
   document.getElementById("winnerModal").style.display = "flex";
 
   const winSound = document.getElementById("winSound");
-  winSound.currentTime = 48;
+  winSound.currentTime = 0;
   winSound.play();
+}
+
+function restartGame() {
+  scoreA = 0;
+  scoreB = 0;
+  time = 600;
+  currentQuarter = 1;
+  speed = 1;
+
+  document.getElementById("scoreA").textContent = scoreA;
+  document.getElementById("scoreB").textContent = scoreB;
+  document.getElementById("quarter").textContent = `${currentQuarter} kėlinys`;
+  document.getElementById("time").textContent = "10:00";
+
+  const table = document
+    .getElementById("statsTable")
+    .getElementsByTagName("tbody")[0];
+  while (table.rows.length > 0) {
+    table.deleteRow(0);
+  }
+
+  const winSound = document.getElementById("winSound");
+  winSound.pause();
+  winSound.currentTime = 0;
+
+  closeModal();
+  clearInterval(interval);
+  startTimer();
 }
 
 function closeModal() {

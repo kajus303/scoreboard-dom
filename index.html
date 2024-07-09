@@ -27,11 +27,16 @@
         <div id="quarter">1 kėlinys</div>
         <div id="time">10:00</div>
         <div class="timer-buttons">
-          <button class="timer-button" onclick="setSpeed(1)">1x</button>
-          <button class="timer-button" onclick="setSpeed(2)">2x</button>
-          <button class="timer-button" onclick="setSpeed(5)">5x</button>
-          <button class="timer-button" onclick="setSpeed(10)">10x</button>
-          <button class="timer-button" onclick="setSpeed(100)">100x</button>
+          <div class="timer-button-row">
+            <button class="timer-button" onclick="setSpeed(1)">1x</button>
+            <button class="timer-button" onclick="setSpeed(2)">2x</button>
+            <button class="timer-button" onclick="setSpeed(5)">5x</button>
+          </div>
+          <div class="timer-button-row">
+            <button class="timer-button" onclick="setSpeed(10)">10x</button>
+            <button class="timer-button" onclick="setSpeed(100)">100x</button>
+            <button class="timer-button" onclick="setSpeed(300)">300x</button>
+          </div>
         </div>
       </div>
       <div class="team" id="teamB">
@@ -69,11 +74,14 @@
       <div class="modal-content">
         <span class="close" onclick="closeModal()">&times;</span>
         <p id="winnerMessage"></p>
+        <button class="restart-button" onclick="restartGame()">
+          Pradėti iš naujo
+        </button>
       </div>
     </div>
     <audio
       id="winSound"
-      src="https://archive.org/download/wearethechampionsremastered2011/We%20Are%20The%20Champions%20%28Remastered%202011%29.mp3"
+      src="https://archive.org/download/ERIKA_201803/ERIKA.mp3"
     ></audio>
     <script src="scoreboard.js"></script>
   </body>

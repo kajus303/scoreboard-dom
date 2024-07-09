@@ -41,12 +41,20 @@ body {
   border-radius: 10px;
   border: 2px solid #555;
   display: inline-block;
+  width: 100px;
+  text-align: center;
 }
 
 .timer-buttons {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.timer-button-row {
+  display: flex;
   justify-content: center;
-  margin-top: 10px;
+  margin: 5px 0;
 }
 
 .timer-button {
@@ -210,4 +218,20 @@ tbody tr:nth-child(odd) {
 #winnerMessage {
   font-size: 1.5em;
   color: #fff;
+}
+
+.restart-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 1em;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background-color: #444;
+  color: white;
+  transition: background-color 0.3s;
+}
+
+.restart-button:hover {
+  background-color: #666;
 }
