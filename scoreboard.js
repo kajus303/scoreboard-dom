@@ -6,6 +6,7 @@ let interval = null;
 let speed = 1;
 
 function addPoints(team, points) {
+  playClickSound();
   if (team === "A") {
     scoreA += points;
     document.getElementById("scoreA").textContent = scoreA;
@@ -14,6 +15,12 @@ function addPoints(team, points) {
     document.getElementById("scoreB").textContent = scoreB;
   }
   addStats(currentQuarter, team, points);
+}
+
+function playClickSound() {
+  const clickSound = document.getElementById("clickSound");
+  clickSound.currentTime = 0;
+  clickSound.play();
 }
 
 function addStats(quarter, team, points) {
@@ -49,6 +56,9 @@ function updateTimer() {
       seconds < 10 ? "0" : ""
     }${seconds}`;
   } else {
+    if (currentQuarter < 4) {
+      playBuzzerSound();
+    }
     currentQuarter++;
     if (currentQuarter <= 4) {
       document.getElementById(
@@ -60,6 +70,12 @@ function updateTimer() {
       showWinner();
     }
   }
+}
+
+function playBuzzerSound() {
+  const buzzerSound = document.getElementById("buzzerSound");
+  buzzerSound.currentTime = 0;
+  buzzerSound.play();
 }
 
 function showWinner() {
