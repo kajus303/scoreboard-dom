@@ -100,6 +100,8 @@ function showWinner() {
 }
 
 function restartGame() {
+  playResetSound();
+
   scoreA = 0;
   scoreB = 0;
   time = 600;
@@ -126,6 +128,12 @@ function restartGame() {
   closeModal();
   clearInterval(interval);
   startTimer();
+}
+
+function playResetSound() {
+  const resetSound = document.getElementById("resetSound");
+  resetSound.currentTime = 0;
+  resetSound.play();
 }
 
 function closeModal() {
