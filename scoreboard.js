@@ -4,8 +4,10 @@ let time = 600;
 let currentQuarter = 1;
 let interval = null;
 let speed = 1;
+let gameOver = false;
 
 function addPoints(team, points) {
+  if (gameOver) return;
   playClickSound();
   if (team === "A") {
     scoreA += points;
@@ -38,6 +40,7 @@ function addStats(quarter, team, points) {
 }
 
 function setSpeed(newSpeed) {
+  if (gameOver) return;
   speed = newSpeed;
   clearInterval(interval);
   startTimer();
@@ -67,6 +70,7 @@ function updateTimer() {
       time = 600;
     } else {
       clearInterval(interval);
+      gameOver = true;
       showWinner();
     }
   }
@@ -101,6 +105,7 @@ function restartGame() {
   time = 600;
   currentQuarter = 1;
   speed = 1;
+  gameOver = false;
 
   document.getElementById("scoreA").textContent = scoreA;
   document.getElementById("scoreB").textContent = scoreB;
