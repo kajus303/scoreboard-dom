@@ -59,7 +59,7 @@ function updateTimer() {
       seconds < 10 ? "0" : ""
     }${seconds}`;
   } else {
-    if (currentQuarter < 4) {
+    if (currentQuarter <= 4) {
       playBuzzerSound();
     }
     currentQuarter++;
