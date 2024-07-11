@@ -94,9 +94,11 @@ function showWinner() {
   document.getElementById("winnerMessage").textContent = winnerMessage;
   document.getElementById("winnerModal").style.display = "flex";
 
-  const winSound = document.getElementById("winSound");
-  winSound.currentTime = 0;
-  winSound.play();
+  setTimeout(() => {
+    const winSound = document.getElementById("winSound");
+    winSound.currentTime = 0;
+    winSound.play();
+  }, 1000);
 }
 
 function restartGame() {
