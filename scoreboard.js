@@ -1,6 +1,9 @@
+const INITIAL_TIME = 600;
+const MAX_QUARTERS = 4;
+
 let scoreA = 0;
 let scoreB = 0;
-let time = 600;
+let time = INITIAL_TIME;
 let currentQuarter = 1;
 let interval = null;
 let speed = 1;
@@ -8,21 +11,26 @@ let gameOver = false;
 
 function addPoints(team, points) {
   if (gameOver) return;
-  playClickSound();
+  playSound("clickSound");
+
   if (team === "A") {
     scoreA += points;
-    document.getElementById("scoreA").textContent = scoreA;
+    updateScore("scoreA", scoreA);
   } else if (team === "B") {
     scoreB += points;
-    document.getElementById("scoreB").textContent = scoreB;
+    updateScore("scoreB", scoreB);
   }
   addStats(currentQuarter, team, points);
 }
 
-function playClickSound() {
-  const clickSound = document.getElementById("clickSound");
-  clickSound.currentTime = 0;
-  clickSound.play();
+function updateScore(elementId, score) {
+  document.getElementById(elementId).textContent = score;
+}
+
+function playSound(soundId) {
+  const sound = document.getElementById(soundId);
+  sound.currentTime = 0;
+  sound.play();
 }
 
 function addStats(quarter, team, points) {
@@ -42,8 +50,12 @@ function addStats(quarter, team, points) {
 function setSpeed(newSpeed) {
   if (gameOver) return;
   speed = newSpeed;
+  restartInterval();
+}
+
+function restartInterval() {
   clearInterval(interval);
-  startTimer();
+  interval = setInterval(updateTimer, 1000 / speed);
 }
 
 function startTimer() {
@@ -52,34 +64,42 @@ function startTimer() {
 
 function updateTimer() {
   if (time > 0) {
-    time--;
-    const minutes = Math.floor(time / 60);
-    const seconds = time % 60;
-    document.getElementById("time").textContent = `${minutes}:${
-      seconds < 10 ? "0" : ""
-    }${seconds}`;
+    updateTime();
   } else {
-    if (currentQuarter <= 4) {
-      playBuzzerSound();
-    }
-    currentQuarter++;
-    if (currentQuarter <= 4) {
-      document.getElementById(
-        "quarter"
-      ).textContent = `${currentQuarter} kėlinys`;
-      time = 600;
-    } else {
-      clearInterval(interval);
-      gameOver = true;
-      showWinner();
-    }
+    handleEndOfQuarter();
   }
 }
 
-function playBuzzerSound() {
-  const buzzerSound = document.getElementById("buzzerSound");
-  buzzerSound.currentTime = 0;
-  buzzerSound.play();
+function updateTime() {
+  time--;
+  const minutes = Math.floor(time / 60);
+  const seconds = time % 60;
+  document.getElementById("time").textContent = `${minutes}:${
+    seconds < 10 ? "0" : ""
+  }${seconds}`;
+}
+
+function handleEndOfQuarter() {
+  if (currentQuarter <= MAX_QUARTERS) {
+    playSound("buzzerSound");
+  }
+  currentQuarter++;
+  if (currentQuarter <= MAX_QUARTERS) {
+    resetQuarter();
+  } else {
+    endGame();
+  }
+}
+
+function resetQuarter() {
+  document.getElementById("quarter").textContent = `${currentQuarter} kėlinys`;
+  time = INITIAL_TIME;
+}
+
+function endGame() {
+  clearInterval(interval);
+  gameOver = true;
+  showWinner();
 }
 
 function showWinner() {
@@ -94,48 +114,44 @@ function showWinner() {
   document.getElementById("winnerMessage").textContent = winnerMessage;
   document.getElementById("winnerModal").style.display = "flex";
 
-  setTimeout(() => {
-    const winSound = document.getElementById("winSound");
-    winSound.currentTime = 0;
-    winSound.play();
-  }, 1000);
+  setTimeout(() => playSound("winSound"), 1000);
 }
 
 function restartGame() {
-  playResetSound();
+  playSound("resetSound");
 
   scoreA = 0;
   scoreB = 0;
-  time = 600;
+  time = INITIAL_TIME;
   currentQuarter = 1;
   speed = 1;
   gameOver = false;
 
-  document.getElementById("scoreA").textContent = scoreA;
-  document.getElementById("scoreB").textContent = scoreB;
+  updateScore("scoreA", scoreA);
+  updateScore("scoreB", scoreB);
   document.getElementById("quarter").textContent = `${currentQuarter} kėlinys`;
   document.getElementById("time").textContent = "10:00";
 
+  clearStatsTable();
+  stopSound("winSound");
+
+  closeModal();
+  restartInterval();
+}
+
+function clearStatsTable() {
   const table = document
     .getElementById("statsTable")
     .getElementsByTagName("tbody")[0];
   while (table.rows.length > 0) {
     table.deleteRow(0);
   }
-
-  const winSound = document.getElementById("winSound");
-  winSound.pause();
-  winSound.currentTime = 0;
-
-  closeModal();
-  clearInterval(interval);
-  startTimer();
 }
 
-function playResetSound() {
-  const resetSound = document.getElementById("resetSound");
-  resetSound.currentTime = 0;
-  resetSound.play();
+function stopSound(soundId) {
+  const sound = document.getElementById(soundId);
+  sound.pause();
+  sound.currentTime = 0;
 }
 
 function closeModal() {
