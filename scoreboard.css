@@ -235,3 +235,26 @@ tbody tr:nth-child(odd) {
 .restart-button:hover {
   background-color: #666;
 }
+
+.reset-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  position: relative;
+  top: 25px;
+}
+
+.reset-button {
+  padding: 10px 20px;
+  font-size: 1em;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background-color: #444;
+  color: white;
+  transition: background-color 0.3s;
+}
+
+.reset-button:hover {
+  background-color: #666;
+}
