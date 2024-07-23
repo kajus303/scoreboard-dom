@@ -256,6 +256,11 @@ tbody tr:nth-child(odd) {
   background-color: #666;
 }
 
+.restart-button:disabled {
+  background-color: #888;
+  cursor: not-allowed;
+}
+
 .reset-button-container {
   display: flex;
   justify-content: center;

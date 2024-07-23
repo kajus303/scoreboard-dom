@@ -171,6 +171,14 @@ function showWinner() {
   document.getElementById("winnerMessage").textContent = winnerMessage;
   document.getElementById("winnerModal").style.display = "flex";
 
+  const restartButton = document.querySelector(".restart-button");
+  restartButton.disabled = true;
+
+  setTimeout(() => {
+    restartButton.disabled = false;
+    restartButton.focus();
+  }, 1001);
+
   setTimeout(() => playSound("winSound"), 1000);
 }
 
