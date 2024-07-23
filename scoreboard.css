@@ -283,3 +283,18 @@ tbody tr:nth-child(odd) {
 .reset-button:hover {
   background-color: #666;
 }
+
+@media (max-width: 768px) {
+  .scoreboard {
+    flex-direction: column;
+  }
+
+  .team {
+    width: 100%;
+  }
+
+  .timer {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}
