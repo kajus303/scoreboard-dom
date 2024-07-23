@@ -146,6 +146,7 @@ function resetQuarter() {
     document.getElementById(
       "quarter"
     ).textContent = `${currentQuarter} kėlinys`;
+    localStorage.setItem("currentQuarter", currentQuarter);
     time = initialTime;
     localStorage.setItem("time", time);
   }
@@ -187,12 +188,12 @@ function restartGame() {
   updateScore("scoreA", scoreA);
   updateScore("scoreB", scoreB);
   document.getElementById("quarter").textContent = `${currentQuarter} kėlinys`;
+  localStorage.setItem("currentQuarter", currentQuarter);
   document.getElementById("time").textContent = "10:00";
 
   localStorage.removeItem("scoreA");
   localStorage.removeItem("scoreB");
   localStorage.removeItem("time");
-  localStorage.removeItem("currentQuarter");
   localStorage.removeItem("stats");
 
   clearStatsTable();
