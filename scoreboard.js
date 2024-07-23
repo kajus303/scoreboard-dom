@@ -1,9 +1,9 @@
-const INITIAL_TIME = 600;
-const MAX_QUARTERS = 4;
+const initialTime = 600;
+const maxQuarters = 4;
 
 let scoreA = 0;
 let scoreB = 0;
-let time = INITIAL_TIME;
+let time = initialTime;
 let currentQuarter = 1;
 let interval = null;
 let speed = 1;
@@ -69,7 +69,7 @@ function startTimer() {
   scoreB = parseInt(localStorage.getItem("scoreB")) || 0;
   time = parseInt(localStorage.getItem("time"));
   if (isNaN(time)) {
-    time = INITIAL_TIME;
+    time = initialTime;
   }
   currentQuarter = parseInt(localStorage.getItem("currentQuarter")) || 1;
   gameOver = JSON.parse(localStorage.getItem("gameOver")) || false;
@@ -128,11 +128,11 @@ function updateTime() {
 }
 
 function handleEndOfQuarter() {
-  if (currentQuarter <= MAX_QUARTERS) {
+  if (currentQuarter <= maxQuarters) {
     playSound("buzzerSound");
   }
   currentQuarter++;
-  if (currentQuarter <= MAX_QUARTERS) {
+  if (currentQuarter <= maxQuarters) {
     resetQuarter();
   } else {
     time = 0;
@@ -146,7 +146,7 @@ function resetQuarter() {
     document.getElementById(
       "quarter"
     ).textContent = `${currentQuarter} kėlinys`;
-    time = INITIAL_TIME;
+    time = initialTime;
     localStorage.setItem("time", time);
   }
 }
@@ -178,7 +178,7 @@ function restartGame() {
 
   scoreA = 0;
   scoreB = 0;
-  time = INITIAL_TIME;
+  time = initialTime;
   currentQuarter = 1;
   speed = 1;
   gameOver = false;
