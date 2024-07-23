@@ -15,9 +15,11 @@ function addPoints(team, points) {
 
   if (team === "A") {
     scoreA += points;
+    localStorage.setItem("scoreA", scoreA);
     updateScore("scoreA", scoreA);
   } else if (team === "B") {
     scoreB += points;
+    localStorage.setItem("scoreB", scoreB);
     updateScore("scoreB", scoreB);
   }
   addStats(currentQuarter, team, points);
@@ -45,6 +47,10 @@ function addStats(quarter, team, points) {
   cellQuarter.textContent = quarter;
   cellTeam.textContent = team === "A" ? "Komanda A" : "Komanda B";
   cellPoints.textContent = points;
+
+  let stats = JSON.parse(localStorage.getItem("stats")) || [];
+  stats.unshift({ quarter, team, points });
+  localStorage.setItem("stats", JSON.stringify(stats));
 }
 
 function setSpeed(newSpeed) {
@@ -59,7 +65,47 @@ function restartInterval() {
 }
 
 function startTimer() {
-  interval = setInterval(updateTimer, 1000 / speed);
+  scoreA = parseInt(localStorage.getItem("scoreA")) || 0;
+  scoreB = parseInt(localStorage.getItem("scoreB")) || 0;
+  time = parseInt(localStorage.getItem("time"));
+  if (isNaN(time)) {
+    time = INITIAL_TIME;
+  }
+  currentQuarter = parseInt(localStorage.getItem("currentQuarter")) || 1;
+  gameOver = JSON.parse(localStorage.getItem("gameOver")) || false;
+
+  updateScore("scoreA", scoreA);
+  updateScore("scoreB", scoreB);
+  document.getElementById("quarter").textContent = `${currentQuarter} kėlinys`;
+
+  const minutes = Math.floor(time / 60);
+  const seconds = time % 60;
+  document.getElementById("time").textContent = `${minutes}:${
+    seconds < 10 ? "0" : ""
+  }${seconds}`;
+
+  let stats = JSON.parse(localStorage.getItem("stats")) || [];
+  stats.forEach((stat) => addStatsRow(stat.quarter, stat.team, stat.points));
+
+  if (!gameOver) {
+    interval = setInterval(updateTimer, 1000 / speed);
+  } else {
+    clearInterval(interval);
+  }
+}
+
+function addStatsRow(quarter, team, points) {
+  const table = document
+    .getElementById("statsTable")
+    .getElementsByTagName("tbody")[0];
+  const newRow = table.insertRow();
+  const cellQuarter = newRow.insertCell(0);
+  const cellTeam = newRow.insertCell(1);
+  const cellPoints = newRow.insertCell(2);
+
+  cellQuarter.textContent = quarter;
+  cellTeam.textContent = team === "A" ? "Komanda A" : "Komanda B";
+  cellPoints.textContent = points;
 }
 
 function updateTimer() {
@@ -67,11 +113,13 @@ function updateTimer() {
     updateTime();
   } else {
     handleEndOfQuarter();
+    localStorage.setItem("time", time);
   }
 }
 
 function updateTime() {
   time--;
+  localStorage.setItem("time", time);
   const minutes = Math.floor(time / 60);
   const seconds = time % 60;
   document.getElementById("time").textContent = `${minutes}:${
@@ -87,18 +135,26 @@ function handleEndOfQuarter() {
   if (currentQuarter <= MAX_QUARTERS) {
     resetQuarter();
   } else {
+    time = 0;
+    localStorage.setItem("time", time);
     endGame();
   }
 }
 
 function resetQuarter() {
-  document.getElementById("quarter").textContent = `${currentQuarter} kėlinys`;
-  time = INITIAL_TIME;
+  if (!gameOver) {
+    document.getElementById(
+      "quarter"
+    ).textContent = `${currentQuarter} kėlinys`;
+    time = INITIAL_TIME;
+    localStorage.setItem("time", time);
+  }
 }
 
 function endGame() {
   clearInterval(interval);
   gameOver = true;
+  localStorage.setItem("gameOver", gameOver);
   showWinner();
 }
 
@@ -126,11 +182,18 @@ function restartGame() {
   currentQuarter = 1;
   speed = 1;
   gameOver = false;
+  localStorage.setItem("gameOver", gameOver);
 
   updateScore("scoreA", scoreA);
   updateScore("scoreB", scoreB);
   document.getElementById("quarter").textContent = `${currentQuarter} kėlinys`;
   document.getElementById("time").textContent = "10:00";
+
+  localStorage.removeItem("scoreA");
+  localStorage.removeItem("scoreB");
+  localStorage.removeItem("time");
+  localStorage.removeItem("currentQuarter");
+  localStorage.removeItem("stats");
 
   clearStatsTable();
   stopSound("winSound");
