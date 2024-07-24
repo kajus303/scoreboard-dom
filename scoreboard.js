@@ -57,6 +57,21 @@ function setSpeed(newSpeed) {
   if (gameOver) return;
   speed = newSpeed;
   restartInterval();
+  updateActiveSpeedButton();
+}
+
+function updateActiveSpeedButton() {
+  const buttons = document.querySelectorAll(".timer-button");
+  buttons.forEach((button) => {
+    button.classList.remove("active");
+  });
+
+  const activeButton = document.querySelector(
+    `.timer-button[data-speed="${speed}"]`
+  );
+  if (activeButton) {
+    activeButton.classList.add("active");
+  }
 }
 
 function restartInterval() {
@@ -92,6 +107,8 @@ function startTimer() {
   } else {
     clearInterval(interval);
   }
+
+  updateActiveSpeedButton();
 }
 
 function addStatsRow(quarter, team, points) {

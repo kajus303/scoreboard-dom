@@ -69,6 +69,10 @@ body {
   color: white;
 }
 
+.timer-button.active {
+  background-color: #888;
+}
+
 .timer-button:hover {
   background-color: #666;
 }

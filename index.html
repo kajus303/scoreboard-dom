@@ -23,14 +23,34 @@
         <div id="time">10:00</div>
         <div class="timer-buttons">
           <div class="timer-button-row">
-            <button class="timer-button" onclick="setSpeed(1)">1x</button>
-            <button class="timer-button" onclick="setSpeed(2)">2x</button>
-            <button class="timer-button" onclick="setSpeed(5)">5x</button>
+            <button class="timer-button" onclick="setSpeed(1)" data-speed="1">
+              1x
+            </button>
+            <button class="timer-button" onclick="setSpeed(2)" data-speed="2">
+              2x
+            </button>
+            <button class="timer-button" onclick="setSpeed(5)" data-speed="5">
+              5x
+            </button>
           </div>
           <div class="timer-button-row">
-            <button class="timer-button" onclick="setSpeed(10)">10x</button>
-            <button class="timer-button" onclick="setSpeed(100)">100x</button>
-            <button class="timer-button" onclick="setSpeed(300)">300x</button>
+            <button class="timer-button" onclick="setSpeed(10)" data-speed="10">
+              10x
+            </button>
+            <button
+              class="timer-button"
+              onclick="setSpeed(100)"
+              data-speed="100"
+            >
+              100x
+            </button>
+            <button
+              class="timer-button"
+              onclick="setSpeed(300)"
+              data-speed="300"
+            >
+              300x
+            </button>
           </div>
         </div>
         <div class="reset-button-container">
