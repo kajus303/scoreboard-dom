@@ -88,6 +88,7 @@ function startTimer() {
   }
   currentQuarter = parseInt(localStorage.getItem("currentQuarter")) || 1;
   gameOver = JSON.parse(localStorage.getItem("gameOver")) || false;
+  speed = 1;
 
   updateScore("scoreA", scoreA);
   updateScore("scoreB", scoreB);
