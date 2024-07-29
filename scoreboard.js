@@ -227,6 +227,7 @@ function restartGame() {
 
   closeModal();
   restartInterval();
+  updateActiveSpeedButton();
 }
 
 function clearStatsTable() {
