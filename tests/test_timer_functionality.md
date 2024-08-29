@@ -16,3 +16,7 @@ This test ensures that the timer counts down correctly from its initial value, t
 
 - The timer should decrement accurately, second by second.
 - When the timer reaches zero, a buzzer sound should play, the current quarter should end, and the timer should reset for the next quarter.
+
+### Actual Results
+
+(Record the actual outcome here after testing)

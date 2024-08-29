@@ -18,3 +18,7 @@ This test ensures that the application resets correctly when the user chooses to
 - All scores should reset to zero.
 - The timer should reset to its initial value.
 - Local storage should be cleared, removing any previously stored scores and time.
+
+### Actual Results
+
+(Record the actual outcome here after testing)

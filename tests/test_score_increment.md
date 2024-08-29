@@ -17,3 +17,7 @@ This test verifies that the score increment functionality works correctly for bo
 
 - The score for the selected team should increment by the appropriate amount (+1, +2, or +3) when the corresponding button is clicked.
 - The updated score should persist after refreshing the browser.
+
+### Actual Results
+
+(Record the actual outcome here after testing)

@@ -16,3 +16,7 @@ This test verifies that sound effects play correctly in response to user actions
 
 - A sound effect should play immediately when a score is incremented.
 - A buzzer sound should play when the timer reaches zero.
+
+### Actual Results
+
+(Record the actual outcome here after testing)

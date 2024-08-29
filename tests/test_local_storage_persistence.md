@@ -17,3 +17,7 @@ This test ensures that the application correctly stores the scores and the curre
 
 - The scores for both teams should persist in local storage and be displayed correctly after a page refresh.
 - The remaining time on the timer should persist and be displayed correctly after a page refresh.
+
+### Actual Results
+
+(Record the actual outcome here after testing)

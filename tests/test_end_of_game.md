@@ -16,3 +16,7 @@ This test verifies that the application correctly handles the end of the game, i
 
 - When the final quarter ends, the application should display the winning team (or a message for a tie).
 - The timer should stop and not reset after the game ends.
+
+### Actual Results
+
+(Record the actual outcome here after testing)
